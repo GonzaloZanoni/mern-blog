@@ -2,7 +2,8 @@ import { Modal, Table, Button } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { useSelector } from 'react-redux';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
-import { FaCheck, FaTimes } from 'react-icons/fa'
+import { FaCheck, FaTimes } from 'react-icons/fa';
+
 //import { Link } from "react-router-dom";
 
 export default function DashUsers() {
@@ -10,7 +11,7 @@ export default function DashUsers() {
     const [users, setUsers] = useState([])
     const [showMore, setShowMore] = useState(true);
     const [showModal, setShowModal] = useState(false);
-    //const [userIdToDelete, setUserIdToDelete] = useState('');
+    const [userIdToDelete, setUserIdToDelete] = useState('');
     // console.log(userPosts)
 
     useEffect(() => {
@@ -52,6 +53,20 @@ export default function DashUsers() {
     };
 
     const handleDeleteUser = async () => {
+        try {
+            const res = await fetch(`/api/user/delete/${userIdToDelete}`, {
+                method: 'DELETE',
+            });
+            const data = await res.json();
+            if (res.ok) {
+                setUsers((prev) => prev.filter((user) => user._id !== userIdToDelete));
+                setShowModal(false);
+            } else {
+                console.log(data.message);
+            }
+        } catch (error) {
+            console.log(error.message)
+        }
     };
 
     return (
@@ -92,7 +107,7 @@ export default function DashUsers() {
                                         <span
                                             onClick={() => {
                                                 setShowModal(true);
-                                                //setUserIdToDelete(user._id);
+                                                setUserIdToDelete(user._id);
                                             }}
                                             className='font-medium text-red-400 hover:underline cursor-pointer'
                                         >
