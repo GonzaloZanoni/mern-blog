@@ -2,6 +2,7 @@ import { Button, Spinner } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom'
 import CallToAction from '../components/CallToAction';
+import CommentSection from '../components/CommentSection';
 export default function PostPage() {
 
     const { postSlug } = useParams();
@@ -46,7 +47,7 @@ export default function PostPage() {
                 {post && post.title}
             </h1>
             <Link to={`/search?category=${post && post.category}`} className='self-center mt-5'>
-                <Button color='green' pill size='xl'>{post && post.category}</Button>
+                <Button gradientDuoTone='greenToBlue' pill size='xl'>{post && post.category}</Button>
             </Link>
             <img
                 src={post && post.image}
@@ -61,9 +62,9 @@ export default function PostPage() {
                 </span>
             </div>
             <div className='p-3 max-w-2xl mx-auto w-full post-content' dangerouslySetInnerHTML={{ __html: post && post.content }}></div>
-
+            <CommentSection postId={post._id} />
             <div className='max-w-4xl mx-auto w-full'>
-                <CallToAction />
+                <CallToAction postId={post._is} />
             </div>
 
         </main>

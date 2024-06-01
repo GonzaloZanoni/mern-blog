@@ -119,6 +119,7 @@ export default function DashUsers() {
                             </Table.Body>
                         ))}
                     </Table>
+
                     {showMore && (
                         <button
                             onClick={handleShowMore}
