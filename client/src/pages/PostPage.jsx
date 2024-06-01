@@ -62,9 +62,11 @@ export default function PostPage() {
                 </span>
             </div>
             <div className='p-3 max-w-2xl mx-auto w-full post-content' dangerouslySetInnerHTML={{ __html: post && post.content }}></div>
+
             <CommentSection postId={post._id} />
+
             <div className='max-w-4xl mx-auto w-full'>
-                <CallToAction postId={post._is} />
+                <CallToAction />
             </div>
 
         </main>

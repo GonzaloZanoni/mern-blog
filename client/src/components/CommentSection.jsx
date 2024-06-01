@@ -8,6 +8,7 @@ export default function CommentSection({ postId }) {
     const { currentUser } = useSelector(state => state.user)
     const [comment, setComment] = useState('');
     const [commentError, setCommentError] = useState(null);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (comment.length > 200) {
@@ -20,14 +21,16 @@ export default function CommentSection({ postId }) {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    content: comment, postId, userId: currentUser._id
+                    content: comment,
+                    postId,
+                    userId: currentUser._id,
                 }),
             });
-
             const data = await res.json();
             if (res.ok) {
                 setComment('');
                 setCommentError(null);
+                // setComments([data, ...comments]);
             }
         } catch (error) {
             setCommentError(error.message);
