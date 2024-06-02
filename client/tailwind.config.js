@@ -10,7 +10,11 @@ export default {
     // 'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      boxShadow: {
+        'custom-green': '0 10px 15px -3px rgba(0, 128, 0, 0.5), 0 4px 6px -2px rgba(0, 128, 0, 0.5)',
+      },
+    },
   },
   plugins: [ 
         flowbite.plugin(), 

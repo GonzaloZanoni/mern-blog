@@ -62,7 +62,7 @@ export default function PostPage() {
 
     return (
         <>
-            <main className='p-3 flex flex-col max-w-[800px] mx-auto min-h-screen'>
+            <main className='p-3 flex flex-col max-w-[800px] mt-5 mx-auto min-h-screen shadow-2xl rounded-md'>
                 <h1 className='text-3xl mt-10 p-3 text-center font-serif max-w-2xl mx-auto lg:text-4xl post-title'>
                     {post && post.title}
                 </h1>
@@ -81,9 +81,9 @@ export default function PostPage() {
                         {post && (post.content.length / 1000).toFixed(0)} mins read
                     </span>
                 </div>
-                <div className='p-3 max-w-2xl mx-auto w-full post-content' dangerouslySetInnerHTML={{ __html: post && post.content }}></div>
+                <div className='p-3 max-w-2xl mt-3 mx-auto w-full post-content' dangerouslySetInnerHTML={{ __html: post && post.content }}></div>
 
-                <CommentSection postId={post._id} />
+                {/* <CommentSection postId={post._id} /> */}
 
                 {/* <div className='max-w-4xl mx-auto w-full'>
                 <CallToAction />
