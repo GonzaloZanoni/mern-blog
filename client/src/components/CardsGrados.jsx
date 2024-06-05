@@ -1,6 +1,12 @@
-// import { HiUser } from 'react-icons/hi';
+import { useNavigate } from "react-router-dom";
 
 export default function CardsGrados() {
+    const navigate = useNavigate();
+
+    const handleCategorySearch = (category) => {
+        navigate(`/search?category=${category}`);
+    }
+
     return (
         <div className="flex justify-center items-center mt-10 min-h-screen bg-white">
 
@@ -10,13 +16,17 @@ export default function CardsGrados() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
-                    <div className="bg-gradient-to-r from-blue-400 to-purple-600 hover:from-green-400 hover:to-blue-500 p-6 rounded-lg shadow-md text-center hover:shadow-2xl transition-shadow duration-300 cursor-pointer">
+                    <div
+                        className="bg-gradient-to-r from-blue-400 to-purple-600 hover:from-green-400 hover:to-blue-500 p-6 rounded-lg shadow-md text-center hover:shadow-2xl transition-shadow duration-300 cursor-pointer"
+                        onClick={() => handleCategorySearch('uncategorized')}
+                    >
                         <h3 className="text-2xl font-semibold mb-4 text-white transition-transform duration-300 hover:scale-110">
                             <img src="/img/1.png" alt="" className="inline-block h-20 w-auto mr-2" /> 1er GRADO
                         </h3>
                     </div>
 
-                    <div className="bg-gradient-to-r from-red-400 to-yellow-500 hover:from-yellow-400 hover:to-pink-400 p-6 rounded-lg shadow-md text-center hover:shadow-2xl transition-shadow duration-300 cursor-pointer">
+                    <div className="bg-gradient-to-r from-red-400 to-yellow-500 hover:from-yellow-400 hover:to-pink-400 p-6 rounded-lg shadow-md text-center hover:shadow-2xl transition-shadow duration-300 cursor-pointer"
+                        onClick={() => handleCategorySearch('reactjs')}>
                         <h3 className="text-2xl font-semibold mb-4 text-white transition-transform duration-300 hover:scale-110">
                             <img src="/img/2.png" alt="" className="inline-block h-20 w-auto mr-2" />2do GRADO
                         </h3>
