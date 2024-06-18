@@ -1,7 +1,7 @@
 
 export default function About() {
     return (
-        <div>
+        <div className="mt-20">
             ABOUT
 
         </div>

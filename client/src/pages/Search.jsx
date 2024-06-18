@@ -79,15 +79,15 @@ export default function Search() {
         navigate(`/search`);
     }
 
-    const handleCategorySearch = (category) => {
-        setSidebarData({
-            ...sidebarData,
-            category,
-        });
-        const urlParams = new URLSearchParams(location.search);
-        urlParams.set('category', category);
-        navigate(`/search?${urlParams.toString()}`);
-    }
+    // const handleCategorySearch = (category) => {
+    //     setSidebarData({
+    //         ...sidebarData,
+    //         category,
+    //     });
+    //     const urlParams = new URLSearchParams(location.search);
+    //     urlParams.set('category', category);
+    //     navigate(`/search?${urlParams.toString()}`);
+    // }
     const handleShowMore = async () => {
         const numberOrPosts = posts.length;
         const startIndex = numberOrPosts;
@@ -162,7 +162,7 @@ export default function Search() {
                     </Button>
                 </form>
                 <div className="mt-4 flex flex-col gap-2">
-                    <Button
+                    {/* <Button
                         type="button"
                         outline
                         gradientDuoTone='purpleToBlue'
@@ -189,7 +189,7 @@ export default function Search() {
                         gradientDuoTone='purpleToBlue'
                         onClick={() => handleCategorySearch('javascript')}>
                         JavaScript
-                    </Button>
+                    </Button> */}
                 </div>
             </div>
             <div className="w-full">

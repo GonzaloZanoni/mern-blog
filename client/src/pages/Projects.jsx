@@ -1,5 +1,5 @@
 export default function Projects() {
     return (
-        <div>Projects</div>
+        <div className="mt-20">Projects</div>
     )
 }

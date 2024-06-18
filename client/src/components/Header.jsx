@@ -50,14 +50,16 @@ export default function Header() {
         navigate(`/search?${searchQuery}`);
     }
 
+
+
     return (
-        <Navbar className='border-b-2'>
+        <Navbar className='border-b-2 border-green-300 shadow-2xl h-20 flex'>
             <Link
                 to='/'
                 className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white'
             >
-                <span className='px-2 py-1 bg-gradient-to-r  from-blue-500 via-indigo-500 to-purple-500 rounded-lg text-white'>
-                    Gonzalo
+                <span className='px-2 py-1 bg-gradient-to-r  from-green-500 via-green-500 to-green-700 rounded-lg text-white'>
+                    Capitan
                 </span>
                 Blog
             </Link>
@@ -66,14 +68,14 @@ export default function Header() {
                     type='text'
                     placeholder='Search...'
                     rightIcon={AiOutlineSearch}
-                    className='hidden lg:inline'
+                    className='hidden lg:block'
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
             </form>
-            <Button className='w-12 h-10 lg:hidden' color='gray' pill>
+            {/* <Button className='w-12 h-10 hidden lg:block' color='gray' pill>
                 <AiOutlineSearch />
-            </Button>
+            </Button> */}
             <div className='flex gap-2 md:order-2'>
                 <Button
                     className='w-12 h-10 hidden sm:inline'
@@ -108,7 +110,7 @@ export default function Header() {
                 ) : (
 
                     <Link to='/sign-in' className='flex flex-wrap gap-2'>
-                        <Button outline gradientDuoTone="purpleToBlue">
+                        <Button outline gradientDuoTone="greenToBlue">
                             Sign In
                         </Button>
                     </Link>

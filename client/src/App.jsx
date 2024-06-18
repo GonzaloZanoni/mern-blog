@@ -5,7 +5,7 @@ import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
 import Dashboard from './pages/Dashboard'
 import Projects from './pages/Projects'
-import Header from './components/Header'
+// import Header from './components/Header'
 import Footer from './components/Footer'
 import PrivateRoute from './components/PrivateRoute'
 import OnlyAdminPrivateRoute from './components/OnlyAdminPrivateRoute'
@@ -14,12 +14,14 @@ import UpdatePost from './pages/UpdatePost'
 import PostPage from './pages/PostPage'
 import ScrollToTop from './components/ScrollToTop'
 import Search from './pages/Search'
+import Header1 from './components/Header1'
 
 export default function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <Header />
+      {/* <Header /> */}
+      <Header1 />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />

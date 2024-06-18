@@ -1,0 +1,310 @@
+:root {
+  --primary-color: #2c3855;
+  --primary-color-dark: #435681;
+  --text-dark: #333333;
+  --text-light: #767268;
+  --extra-light: #f3f4f6;
+  --white: #ffffff;
+  --max-width: 1400px;
+}
+
+.section_home {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+
+.section__container {
+  max-width: var(--max-width);
+  margin: auto;
+  padding: 5rem 1rem;
+}
+
+.section__header {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  text-align: center;
+}
+
+
+img {
+  width: 100%;
+  display: flex;
+}
+
+
+
+.header__container {
+  padding: 1rem 1rem 5rem 1rem ;
+  
+}
+
+
+.header__image__container {
+  position: relative;
+  min-height: 750px;
+  background-image: linear-gradient(
+      to right,
+      rgba(35, 62, 50, 0.9),
+      rgba(84, 113, 186, 0.1)
+    ),
+    url('/img/colePrueba-2.png');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 2rem;
+  background-attachment: local;
+}
+
+.header__content {
+  max-width: 800px;
+  padding: 5rem 8rem;
+}
+
+.header__content h1 {
+  margin-bottom: 1rem;
+  font-size: 3.5rem;
+  line-height: 4rem;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.header__content p {
+  color: var(--extra-light);
+  margin-bottom: 1rem;
+} 
+
+                          /* ---------- Section Capitan Ardiles ----------- */
+
+.gallary{
+  margin: 2rem;
+  padding: 5rem;
+}
+
+.section__title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+}
+
+.section__subtitle {
+  font-size: 1rem;
+  color: var(--text-dark);
+  max-width: calc(var(--max-width) / 2);
+}
+
+.gallary__container {
+  padding: 5rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.image__gallary {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.gallary__col {
+  display: grid;
+  place-content: center;
+  gap: 1rem;
+}
+
+.gallary__col img {
+  border-radius: 1rem;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+
+.gallary__content{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.gallary__content > div {
+  max-width: 400px;
+}
+
+.gallary__content .section__subtitle {
+  margin-bottom: 2rem;
+}
+
+
+/*  --------- RESPONSIVE Section Cap. Ardiles. */
+@media (width < 1030px) {
+  .gallary{
+    margin: 2rem;
+    padding: 2rem;
+  }
+  .gallary__container {
+    padding: 2rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .gallary__container {
+    padding: 2rem;
+  }
+}
+@media (width < 900px) {
+  .gallary{
+    margin: 2rem;
+    padding: 2rem;
+  }
+  .gallary__container {
+    padding: 3rem;
+    grid-template-columns: repeat(1, 1fr);
+  padding: 3rem;
+  }
+
+}
+
+@media (width < 600px) {
+  .gallary{
+    margin: 1rem;
+    padding: 1rem;
+  }
+  .gallary__container {
+    padding: 1rem;
+    grid-template-columns: repeat(1, 1fr);
+  padding: 1rem;
+  }
+ 
+  .image__gallary {
+    gap: 0.5rem;
+  }
+  
+  .gallary__col {
+    gap: 0.5rem;
+  }
+}
+@media (width < 400px) {
+  .gallary{
+    margin: 0.5rem;
+    padding: 0.3rem;
+  }
+  .gallary__container {
+    padding: 0.5rem;
+    grid-template-columns: repeat(1, 1fr);
+  padding: 1rem;
+  }
+
+  .image__gallary {
+    gap: 0.3rem;
+  }
+  
+  .gallary__col {
+    gap: 0.3rem;
+  }
+}
+
+/* Home.css */
+
+@keyframes slideInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.gallary__col img,
+.gallary__content {
+  opacity: 0; /* Inicialmente oculto */
+}
+
+.img-visible img {
+  animation: slideInFromLeft 1s ease-in-out forwards;
+}
+
+.content-visible {
+  animation: slideInFromRight 1s ease-in-out forwards;
+}
+
+
+
+/*  ----------- RESPONSIVE ---------- */
+  @media (width < 600px) {
+  .nav__links {
+    display: none;
+  }
+
+  .header__container {
+    padding-bottom: 25rem;
+  }
+  .header__content {
+    max-width: 800px;
+    padding: 5rem 2rem;
+  }
+  .header__content h1 {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    line-height: 3rem;
+    font-weight: 500;
+    color: var(--white);
+  }
+
+  .header__container {
+    padding: 1rem 1rem 5rem 1rem;
+  }
+
+  .header__image__container {
+    position: relative;
+    min-height: 600px;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 1rem;
+  }
+}
+
+/* ---- animations ------ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header__content h1,
+.header__content p,
+.header__content Button {
+  opacity: 0; /* Inicialmente oculto */
+  animation: fadeInUp 1s forwards; /* Aplica la animación */
+}
+
+.header__content h1 {
+  animation-delay: 0.5s; /* Retardo para el título */
+}
+
+.header__content p {
+  animation-delay: 1s; /* Retardo para el párrafo */
+}
+
+.header__content Button {
+  animation-delay: 1s; /* Retardo para el párrafo */
+}
