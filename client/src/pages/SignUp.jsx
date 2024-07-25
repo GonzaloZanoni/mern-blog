@@ -48,7 +48,7 @@ export default function SignUp() {
                         to='/'
                         className='font-bold dark:text-white text-4xl'
                     >
-                        <span className='px-2 py-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-lg text-white'>
+                        <span className='px-2 py-1 bg-gradient-to-r  from-green-500 via-green-500 to-green-700 rounded-lg text-white'>
                             Gonzalo
                         </span>
                         Blog
@@ -88,7 +88,7 @@ export default function SignUp() {
                                 onChange={handleChange}
                             />
                         </div>
-                        <Button gradientDuoTone='purpleToBlue' type="submit" disabled={loading}>
+                        <Button gradientDuoTone='greenToBlue' type="submit" disabled={loading}>
                             {
                                 loading ? (
                                     <>

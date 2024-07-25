@@ -112,7 +112,7 @@ export default function Header1() {
                         </li>
                         <li>
                             <Link
-                                className={`relative overflow-hidden border-b border-transparent hover:border-green-500 transition duration-300 ease-in-out p-2 ${path === "/projects" ? "border-green-500" : ""}`}
+                                className={`relative overflow-hidden text-white font-semibold bg-orange-400 rounded-3xl border-xl  hover:border-orange-400 hover:bg-white hover:text-orange-400 transition duration-300 ease-in-out p-2 ${path === "/projects" ? "border-green-500" : ""}`}
                                 to="/projects"
                                 onClick={onToggleMenu}>
                                 ConectArte
@@ -143,12 +143,15 @@ export default function Header1() {
                         <Dropdown.Item onClick={handleSignout}>Sign out</Dropdown.Item>
                     </Dropdown>
                 ) : (
-                    <Link to="/sign-in" className="flex flex-wrap gap-2">
-                        <Button outline gradientDuoTone="greenToBlue">
+
+                    <Link to="/about" className="flex flex-wrap gap-2">
+                        {/* <Button outline gradientDuoTone="greenToBlue">
                             Sign In
-                        </Button>
+                        </Button> */}
+                        <img src="img/logo1.png" alt="logo" className='h-12 w-12' />
                     </Link>
-                )}
+                )
+                }
 
                 <div className="flex items-center gap-6 md:hidden">
                     <button onClick={onToggleMenu} className="text-3xl cursor-pointer">

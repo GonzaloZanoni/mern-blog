@@ -80,7 +80,7 @@ img {
 
 .gallary{
   margin: 2rem;
-  padding: 5rem;
+  padding: 2rem 5rem;
 }
 
 .section__title {
@@ -118,6 +118,7 @@ img {
 .gallary__col img {
   border-radius: 1rem;
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+  outline: solid 0.2rem green;
 }
 
 
@@ -172,7 +173,7 @@ img {
   .gallary__container {
     padding: 1rem;
     grid-template-columns: repeat(1, 1fr);
-  padding: 1rem;
+   padding: 1rem;
   }
  
   .image__gallary {
@@ -181,6 +182,9 @@ img {
   
   .gallary__col {
     gap: 0.5rem;
+  }
+  .gallary__col img{
+    outline: solid 0.1rem green;
   }
 }
 @media (width < 400px) {
@@ -191,7 +195,7 @@ img {
   .gallary__container {
     padding: 0.5rem;
     grid-template-columns: repeat(1, 1fr);
-  padding: 1rem;
+    padding: 1rem;
   }
 
   .image__gallary {
@@ -201,6 +205,7 @@ img {
   .gallary__col {
     gap: 0.3rem;
   }
+
 }
 
 /* Home.css */
@@ -239,6 +244,85 @@ img {
 .content-visible {
   animation: slideInFromRight 1s ease-in-out forwards;
 }
+
+
+
+                          /* --------- section banner ConectArte --------- */
+
+
+
+.section__container {
+  max-width: var(--max-width);
+  margin: auto;
+  /* padding: 5rem 1rem; */
+}
+
+.section__header {
+  font-size: 3rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  text-align: center;
+}
+
+.client {
+
+  /* background: rgb(251,166,67);
+  background: linear-gradient(0deg, rgba(251,166,67,0.5127626050420168) 47%, rgba(247,216,103,0.4671043417366946) 80%); */
+  background: rgb(249,196,61);
+  background: linear-gradient(0deg, rgba(249,196,61,0.6727065826330532) 63%, rgba(255,151,23,0.6166841736694677) 98%);
+}
+
+.client__grid {
+  margin-top: 4rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+}
+
+.client__card {
+  padding: 1rem;
+  background-color: var(--white);
+  border-radius: 1rem;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+  justify-content: center;
+  align-items: center;
+  /* outline: orange solid 0.2rem; */
+}
+
+.client__card img {
+  max-width: 130px;
+  margin: auto;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  border-radius: 100%;
+  
+}
+
+.client__card p {
+  text-align: center;
+  color: var(--text-dark);
+}
+
+/* Responsive CONECTARTE */
+
+@media (width < 900px){
+  .client__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+@media (width < 600px){
+  .client__grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .client__card{
+    margin: 0.3rem;
+  }
+  .section__header{
+    font-size: 2rem;
+  }
+}
+
 
 
 
@@ -292,7 +376,8 @@ img {
 
 .header__content h1,
 .header__content p,
-.header__content Button {
+.header__content Button,
+.title-25 {
   opacity: 0; /* Inicialmente oculto */
   animation: fadeInUp 1s forwards; /* Aplica la animación */
 }
@@ -308,3 +393,9 @@ img {
 .header__content Button {
   animation-delay: 1s; /* Retardo para el párrafo */
 }
+
+.title-25 {
+  animation-delay: 1s; /* Retardo para el párrafo */
+}
+
+/* maquina de escribir */

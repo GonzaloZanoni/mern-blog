@@ -11,11 +11,15 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        playwrite: ['"Playwrite CU"', 'sans-serif'],
+      },
       aspectRatio: {
         'square': [1, 1], // Proporción cuadrada
       },
       backgroundImage: {
         'cole': "url('/img/colePrueba-2.png')",
+        'grados':"url('/img/gallery-bg.png')",
       },
       backgroundSize: {
         '110%': '110%',
@@ -23,6 +27,8 @@ module.exports = {
       },
       boxShadow: {
         'custom-green': '0 10px 15px -3px rgba(0, 128, 0, 0.5), 0 4px 6px -2px rgba(0, 128, 0, 0.5)',
+        'custom-purple': '0 10px 15px -3px rgba(128, 0, 128, 0.5), 0 4px 6px -2px rgba(128, 0, 128, 0.5)',
+
       },
       keyframes: {
         typing: {
@@ -42,7 +48,7 @@ module.exports = {
   },
   plugins: [
     flowbite.plugin(),
-    require('tailwind-scrollbar', '@tailwindcss/aspect-ratio'),
+    require('tailwind-scrollbar',),
   ],
 };
 

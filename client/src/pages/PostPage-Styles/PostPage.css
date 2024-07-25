@@ -1,0 +1,30 @@
+/* styles.css */
+@media (min-width: 768px) {
+    .gallery-img-container {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .gallery-img-container img {
+        transition: transform 0.3s ease;
+    }
+
+    .gallery-img-container:hover img {
+        transform: scale(1.2);
+    }
+}
+    
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+  }
+  
+  .gallery img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+
+  

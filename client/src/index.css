@@ -1,48 +1,64 @@
+@import "quill/dist/quill.core.css";
+@import "quill/dist/quill.snow.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body{
-    height: 100vh ;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Asegura que el padding y el border se incluyan en el ancho y alto */
+  }
+  
+  html, body {
+    /* font-family: Arial, sans-serif; Establece una fuente predeterminada */
 }
 
-.ql-editor {
-    font-size: 1.05rem;
-}
-
-.post-title{
-    font-family: sans-serif;
-}
-
-.post-content{
-    margin-bottom: 0.5rem;
-}
-
-.post-content h1{
-    font-size: 1.5rem;
-    font-weight: 600;
-    font-family: sans-serif;
-    margin: 1.5rem;
-}
-
-.post-content h2{
+.post-content h2 {
     font-size: 1.4rem;
     font-family: sans-serif;
     margin: 1.5rem 0;
 }
 
-.post-content a{
+.post-content a {
     color: rgb(73, 149, 199);
     text-decoration: none;
 }
 
-.post-content a:hover{
+.post-content ol {
+    list-style-type: decimal;
+    padding-left: 40px;
+}
+
+.post-content ol li {
+    margin-bottom: 5px;
+}
+
+.post-content a:hover {
     text-decoration: underline;
 }
 
-.dark .post-content a{
+.dark .post-content a {
     color: green;
 }
 
 
+
+/* ------ CONECTARTE ARTE -------  */
+
+.conectarte_arte {
+    background: rgb(149, 78, 224);
+    background: linear-gradient(0deg, rgba(149, 78, 224, 0.958420868347339) 51%, rgba(56, 29, 157, 1) 93%);
+}
+
+.conectarte_ciencia {
+    background: rgb(41, 130, 44);
+    background: linear-gradient(0deg, rgba(41, 130, 44, 0.804359243697479) 71%, rgba(79, 212, 76, 0.9248074229691877) 98%);
+}
+
+.conectarte-programacion{
+    background: rgb(39,34,195);
+    background: linear-gradient(0deg, rgba(39,34,195,1) 12%, rgba(45,143,253,1) 100%);
+}
 

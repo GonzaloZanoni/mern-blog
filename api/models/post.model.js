@@ -29,6 +29,10 @@ const postSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    gallery: {
+      type: [String],
+      default: [],
+    },
   },
   { timestamps: true }
 );

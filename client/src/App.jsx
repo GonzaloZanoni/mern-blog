@@ -15,6 +15,9 @@ import PostPage from './pages/PostPage'
 import ScrollToTop from './components/ScrollToTop'
 import Search from './pages/Search'
 import Header1 from './components/Header1'
+import ConectarteArte from './pages/ConectarteArte'
+import ConectarteCiencia from './pages/ConectarteCiencia'
+import ConectarteProgramacion from './pages/ConectarteProgramacion'
 
 export default function App() {
   return (
@@ -28,6 +31,9 @@ export default function App() {
         <Route path='/sign-in' element={<SignIn />} />
         <Route path='/sign-up' element={<SignUp />} />
         <Route path='/search' element={<Search />} />
+        <Route path='/conectarte-arte' element={<ConectarteArte />} />
+        <Route path='/conectarte-ciencia' element={<ConectarteCiencia />} />
+        <Route path='/conectarte-programacion' element={<ConectarteProgramacion />} />
         <Route element={<PrivateRoute />}>
           <Route path='/dashboard' element={<Dashboard />} />
         </Route>

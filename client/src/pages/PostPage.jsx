@@ -1,10 +1,14 @@
 /* eslint-disable no-unused-vars */
+
 import { Button, Spinner } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom'
 // import CallToAction from '../components/CallToAction';
-import CommentSection from '../components/CommentSection';
+// import CommentSection from '../components/CommentSection';
 import PostCard from '../components/PostCard';
+import './PostPage-Styles/PostPage.css'
+
+
 export default function PostPage() {
 
     const { postSlug } = useParams();
@@ -54,6 +58,7 @@ export default function PostPage() {
     }, []);
 
 
+
     if (loading) return (
         <div className='flex justify-center items-center min-h-screen'>
             <Spinner size='xl' />
@@ -62,7 +67,7 @@ export default function PostPage() {
 
     return (
         <>
-            <main className='p-3 flex flex-col max-w-[800px] mt-5 mx-auto min-h-screen shadow-2xl rounded-md'>
+            <main className='p-3 flex flex-col max-w-[900px] mt-5 mx-auto min-h-screen shadow-2xl rounded-md'>
                 <h1 className='text-3xl mt-10 p-3 text-center font-serif max-w-2xl mx-auto lg:text-4xl post-title'>
                     {post && post.title}
                 </h1>
@@ -83,6 +88,28 @@ export default function PostPage() {
                 </div>
                 <div className='p-3 max-w-2xl mt-3 mx-auto w-full post-content' dangerouslySetInnerHTML={{ __html: post && post.content }}></div>
 
+
+                {/* Render Gallery Images */}
+                {post && post.gallery && post.gallery.length > 0 && (
+                    <div className='p-3 max-w-2xl mt-5 mx-auto w-full'>
+                        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
+                            {post.gallery.map((image, index) => (
+                                <div
+                                    key={index}
+                                    className='gallery-img-container cursor-pointer'
+                                // onClick={() => openLightbox(index)}
+                                >
+                                    <img
+                                        src={image}
+                                        alt={`Gallery image ${index + 1}`}
+                                        className='w-full h-auto rounded-md shadow-md'
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
                 {/* <CommentSection postId={post._id} /> */}
 
                 {/* <div className='max-w-4xl mx-auto w-full'>
@@ -91,8 +118,8 @@ export default function PostPage() {
 
 
             </main>
-            <div className='flex flex-col justify-center items-center m-5'>
-                <h1 className='text-xl mt-5'>Recents articles</h1>
+            <div className='flex flex-col justify-center items-center m-5 mt-32'>
+                <h1 className='text-xl mt-5 text-green-500 font-bol'>Posts recientes</h1>
                 <div className='flex flex-wrap gap-5 mt-5 justify-center'>
                     {
                         recentPosts &&
