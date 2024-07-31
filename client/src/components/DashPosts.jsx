@@ -15,11 +15,16 @@ export default function DashPosts() {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const res = await fetch(`/api/post/getposts?userId=${currentUser._id}`)
+                const res = await fetch(
+                    currentUser.isAdmin
+                        ? `/api/post/getposts?`
+                        // userId=${currentUser._id}
+                        : `/api/post/user/${currentUser._id}`
+                );
                 const data = await res.json()
                 if (res.ok) {
-                    setUserPosts(data.posts);
-                    if (data.posts.length < 9) {
+                    setUserPosts(data.posts || data);
+                    if ((data.posts || data).length < 9) {
                         setShowMore(false)
                     }
                 }
@@ -27,20 +32,22 @@ export default function DashPosts() {
                 console.log(error.message)
             }
         };
-        if (currentUser.isAdmin) {
-            fetchPosts();
-        }
-    }, [currentUser._id])
+        fetchPosts();
+        // if (currentUser.isAdmin || currentUser.isEmployed) {
+        // }
+    }, [currentUser])
+    // [currentUser._id, currentUser.isAdmin])
 
     const handleShowMore = async () => {
         const startIndex = userPosts.length;
         try {
             const res = await fetch(
-                `/api/post/getposts?userId=${currentUser._id}&startIndex=${startIndex}`
+                `${currentUser.isAdmin ? `/api/post/getposts` : `/api/post/user/${currentUser._id}`}?startIndex=${startIndex}`
+                // `/api/post/getposts?userId=${currentUser._id}&startIndex=${startIndex}`
             );
             const data = await res.json();
             if (res.ok) {
-                setUserPosts((prev) => [...prev, ...data.posts]);
+                setUserPosts((prev) => [...prev, ...(data.posts || data)]);
                 if (data.posts.length < 9) {
                     setShowMore(false);
                 }
@@ -74,7 +81,8 @@ export default function DashPosts() {
 
     return (
         <div className='w-full table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
-            {currentUser.isAdmin && userPosts.length > 0 ? (
+            {/* {currentUser.isAdmin && userPosts.length > 0 ? ( */}
+            {userPosts.length > 0 ? (
                 <>
                     <Table hoverable className="shadow-md">
                         <Table.Head>
@@ -82,8 +90,10 @@ export default function DashPosts() {
                             <Table.HeadCell>Post image</Table.HeadCell>
                             <Table.HeadCell>Post title</Table.HeadCell>
                             <Table.HeadCell>Category</Table.HeadCell>
-                            <Table.HeadCell>Delete</Table.HeadCell>
-                            <Table.HeadCell><span>Edit</span></Table.HeadCell>
+                            {(currentUser.isAdmin || currentUser.isEmployed) && <Table.HeadCell>Delete</Table.HeadCell>}
+                            {(currentUser.isAdmin || currentUser.isEmployed) && <Table.HeadCell><span>Edit</span></Table.HeadCell>}
+                            {/* <Table.HeadCell>Delete</Table.HeadCell> */}
+                            {/* <Table.HeadCell><span>Edit</span></Table.HeadCell> */}
 
                         </Table.Head>
                         {userPosts.map((post) => (
@@ -110,26 +120,29 @@ export default function DashPosts() {
                                         </Link>
                                     </Table.Cell>
                                     <Table.Cell>{post.category}</Table.Cell>
-                                    <Table.Cell>
-                                        <span
-                                            onClick={() => {
-                                                setShowModal(true);
-                                                setPostIdToDelete(post._id);
-                                            }}
-                                            className='font-medium text-red-500 hover:underline cursor-pointer'
-                                        >
-                                            Delete
-                                        </span>
-                                    </Table.Cell>
-                                    <Table.Cell>
-                                        <Link
-                                            className='text-blue-500 hover:underline'
-                                            to={`/update-post/${post._id}`}
-                                        >
-                                            <span>Edit</span>
-                                        </Link>
-                                    </Table.Cell>
-
+                                    {(currentUser.isAdmin || currentUser.isEmployed) && (
+                                        <>
+                                            <Table.Cell>
+                                                <span
+                                                    onClick={() => {
+                                                        setShowModal(true);
+                                                        setPostIdToDelete(post._id);
+                                                    }}
+                                                    className='font-medium text-red-500 hover:underline cursor-pointer'
+                                                >
+                                                    Delete
+                                                </span>
+                                            </Table.Cell>
+                                            <Table.Cell>
+                                                <Link
+                                                    className='text-blue-500 hover:underline'
+                                                    to={`/update-post/${post._id}`}
+                                                >
+                                                    <span>Edit</span>
+                                                </Link>
+                                            </Table.Cell>
+                                        </>
+                                    )}
                                 </Table.Row>
                             </Table.Body>
                         ))}

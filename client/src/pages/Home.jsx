@@ -78,11 +78,11 @@ export default function Home() {
                 <div className="section__container gallary__container">
                     <div className="image__gallary">
                         <div className="gallary__col">
-                            <img src="img/escuela3.jpg" alt="gallary" />
+                            <img src="img/escuela2.jpg" alt="gallary" />
                         </div>
                         <div className="gallary__col">
                             <img src="img/escuela1.jpg" alt="gallary" />
-                            <img src="img/escuela2.jpg" alt="gallary" />
+                            <img src="img/escuela3.jpg" alt="gallary" />
 
                         </div>
                     </div>
@@ -114,8 +114,7 @@ export default function Home() {
                             <h1 className='text-4xl font-bold mb-4 text-orange-500'>Artística</h1>
                             <img src="img/arte.jpg" alt="client" />
                             <p>
-                                The booking process was seamless, and the confirmation was
-                                instant. I highly recommend WDM&Co for hassle-free hotel bookings.
+                                Mira nuestras actividades para la producción de un cortometraje con marionetas, diseño de escenarios, títeres y mucho más...
                             </p>
                             <Link to='/conectarte-arte'>
                                 <Button
@@ -131,8 +130,7 @@ export default function Home() {
                             <h1 className='text-4xl font-bold mb-4 text-orange-500'>Ciencias</h1>
                             <img src="img/ciencias.jpg" alt="client" />
                             <p>
-                                The website provided detailed information about hotel, including
-                                amenities, photos, which helped me make an informed decision.
+                                Mira nuestras actividades de investigación sobre la historia de  nuestra escuela, creando una linea del tiempo  y mucho más...
                             </p>
                             <Link to='/conectarte-ciencia'>
                                 <Button
@@ -148,7 +146,7 @@ export default function Home() {
                             <h1 className='text-3xl font-bold mb-4 text-orange-500 '>Programación y TIC´s</h1>
                             <img src="img/programacion.jpg" alt="client" />
                             <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat tenetur exercitationem iusto nisi illo eos quas consectetur.
+                                Mira nuestras actividades para la creación de juegos interactivos a través de la plataforma ´SCRATCH´,   y mucho más...
                             </p>
                             <Link to='conectarte-programacion'>
                                 <Button
@@ -169,7 +167,7 @@ export default function Home() {
             <div className='max-w-8xl mx-auto p-3 flex flex-col gap-8 py-7 bg-transparent'>
                 {posts && posts.length > 0 && (
                     <div className='flex flex-col gap-6'>
-                        <h2 className='text-4xl font-bold text-center'>Últimos Posts</h2>
+                        <h1 className='text-2xl sm:text-4xl font-bold text-center'>Últimos Posts</h1>
                         <div className='flex justify-center flex-wrap gap-7 max-w-[1800px] m-3'>
                             {posts.map((post) => (
                                 // Section Latest Posts -----

@@ -13,3 +13,16 @@ export const verifyToken = (req, res, next) => {
     next();
   });
 };
+
+export const verifyRoles = (...roles) => {
+  return (req, res, next) => {
+    if (!req.user) {
+      return next(errorHandler(401, 'Unauthorized'));
+    }
+    const hasRole = roles.some(role => req.user[role]);
+    if (!hasRole) {
+      return next(errorHandler(403, 'Forbidden'));
+    }
+    next();
+  };
+};

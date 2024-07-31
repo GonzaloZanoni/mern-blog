@@ -8,7 +8,7 @@ export default function ConectarteProgramacion() {
 
     useEffect(() => {
         const fetchPosts = async () => {
-            const res = await fetch('/api/post/getposts?category=reactjs&limit=6');
+            const res = await fetch('/api/post/getposts?category=Programacion&limit=6');
             const data = await res.json();
             setPosts(data.posts);
         };
@@ -34,10 +34,10 @@ export default function ConectarteProgramacion() {
                         </div>
                         <div className="flex flex-col justify-center p-4">
                             <h2 className="text-2xl text-blue-300 font-bold mb-4 text-center md:text-left">Explora nuestras experiencias tecnológicas.</h2>
-                            <p className="text-lg text-white text-center md:text-left">
+                            {/* <p className="text-lg text-white text-center md:text-left">
                                 A través de la tecnología se fomentará la colaboración, creatividad, el trabajo en equipo y exploración mediante el autoconocimiento, logrando plasmar el arte y las ciencias mediantes juegos interactivos, diseño audio-visual.
 
-                            </p>
+                            </p> */}
                         </div>
                     </div>
                 </div>
@@ -59,7 +59,7 @@ export default function ConectarteProgramacion() {
                                 <PostCard key={post._id} post={post} />
                             ))}
                         </div>
-                        <Link to={'/search?category=uncategorized'} className='text-lg font-semibold text-green-500 hover:underline text-center'>
+                        <Link to={`/search?category=${encodeURIComponent('Programacion')}`} className='text-lg font-semibold text-green-500 hover:underline text-center'>
                             Ver más Posts
                         </Link>
                     </div>

@@ -1,10 +1,11 @@
 import Post from "../models/post.model.js";
-import { errorHandler } from "../utils/error.js"
+import User from "../models/user.model.js";
+import { errorHandler } from "../utils/error.js";
 
 // CREATE -------
 
 export const create = async (req, res, next) => {
-  if (!req.user.isAdmin) {
+  if (!req.user.isAdmin && !req.user.isEmployed) {
       return next(errorHandler(403, 'You are not allowed to create a post'));
   }
   if (!req.body.title || !req.body.content) {
@@ -31,7 +32,7 @@ export const create = async (req, res, next) => {
 };
 
 
-// GET --------
+// GET all posts--------
 
 export const getposts = async (req, res, next) => {
     try {
@@ -67,21 +68,49 @@ export const getposts = async (req, res, next) => {
       const lastMonthPosts = await Post.countDocuments({
         createdAt: { $gte: oneMonthAgo },
       });
+
+      const postsWithUsernames = await Promise.all(posts.map(async (post) => {
+        const user = await User.findById(post.userId).select('username profilePicture');
+        return {
+          ...post.toObject(),
+          username: user ? user.username : 'Unknown',
+           profilePicture: user ? user.profilePicture : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+        };
+      }));
   
       res.status(200).json({
         posts,
         totalPosts,
         lastMonthPosts,
+        posts: postsWithUsernames,
       });
     } catch (error) {
       next(error);
     }
   };
 
+// GET posts by user --------
+export const getPostsByUser = async (req, res, next) => {
+  try {
+    const userId = req.user.id;
+
+    // Check if the user is an admin or the owner of the posts
+    if (!req.user.isAdmin && req.user.id !== req.params.userId) {
+      return next(errorHandler(403, 'You are not allowed to view these posts'));
+    }
+
+    const posts = await Post.find({ userId });
+
+    res.status(200).json(posts);
+  } catch (error) {
+    next(error);
+  }
+};
+
 // DELETE --------
 
 export const deletepost = async (req, res, next) =>{
-    if (!req.user.isAdmin || req.user.id !== req.params.userId) {
+    if (!req.user.isAdmin && (!req.user.isEmployed || req.user.id !== req.params.userId)) {
         return next(errorHandler(403, 'You are not allowed to delete this post'));
       }
       try {
@@ -93,7 +122,7 @@ export const deletepost = async (req, res, next) =>{
 }
 
 export const updatepost = async (req, res, next) => {
-    if (!req.user.isAdmin || req.user.id !== req.params.userId) {
+    if (!req.user.isAdmin && (!req.user.isEmployed || req.user.id !== req.params.userId)) {
       return next(errorHandler(403, 'You are not allowed to update this post'));
     }
     try {

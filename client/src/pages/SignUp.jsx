@@ -49,7 +49,7 @@ export default function SignUp() {
                         className='font-bold dark:text-white text-4xl'
                     >
                         <span className='px-2 py-1 bg-gradient-to-r  from-green-500 via-green-500 to-green-700 rounded-lg text-white'>
-                            Gonzalo
+                            Capitan
                         </span>
                         Blog
                     </Link>

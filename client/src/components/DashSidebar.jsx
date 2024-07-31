@@ -11,6 +11,7 @@ export default function DashSidebar() {
     const [tab, setTab] = useState('')
     const dispatch = useDispatch();
     const { currentUser } = useSelector(state => state.user);
+
     useEffect(() => {
         const urlParams = new URLSearchParams(location.search)
         const tabFromUrl = urlParams.get('tab')
@@ -36,6 +37,12 @@ export default function DashSidebar() {
         }
     }
 
+    const getUserLabel = () => {
+        if (currentUser.isAdmin) return 'Admin';
+        if (currentUser.isEmployed) return 'Docente';
+        return 'User';
+    };
+
     return (
         <Sidebar className='w-full md:w-56'>
             <Sidebar.Items>
@@ -44,13 +51,13 @@ export default function DashSidebar() {
                         <Sidebar.Item
                             active={tab === 'profile'}
                             icon={HiUser}
-                            label={currentUser.isAdmin ? 'Admin' : 'User'}
+                            label={getUserLabel()}
                             labelColor='dark'
                             as='div'>
-                            Profile
+                            Perfil
                         </Sidebar.Item>
                     </Link>
-                    {currentUser.isAdmin && (
+                    {(currentUser.isAdmin || currentUser.isEmployed) && (
 
                         <Link to='/dashboard?tab=posts'>
                             <Sidebar.Item
@@ -68,7 +75,7 @@ export default function DashSidebar() {
                                 active={tab === 'users'}
                                 icon={HiOutlineUserGroup}
                                 as='div'>
-                                Users
+                                Usuarios
                             </Sidebar.Item>
                         </Link>
                     )}

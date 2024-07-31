@@ -28,35 +28,35 @@ export default function CardsGrados() {
 
                     <div className="bg-gradient-to-r from-red-400 to-yellow-500 hover:from-yellow-400 hover:to-pink-400 p-6 rounded-lg shadow-md text-center hover:shadow-2xl transition-shadow duration-300 cursor-pointer"
                         onClick={() => handleCategorySearch('Segundo-grado')}>
-                        <h3 className="text-2xl font-semibold mb-4 text-white transition-transform duration-300 hover:scale-110">
+                        <h3 className="text-xl font-semibold mb-4 text-white transition-transform duration-300 hover:scale-110">
                             <img src="/img/2.png" alt="" className="inline-block h-20 w-auto mr-2" />2do GRADO
                         </h3>
                     </div>
 
                     <div className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-cyan-400 hover:to-pink-400 p-6 rounded-lg shadow-md text-center hover:shadow-2xl transition-shadow duration-300 cursor-pointer"
                         onClick={() => handleCategorySearch('Tercer-grado')}>
-                        <h3 className="text-2xl font-semibold mb-4 text-white transition-transform duration-300 hover:scale-110">
+                        <h3 className="text-xl font-semibold mb-4 text-white transition-transform duration-300 hover:scale-110">
                             <img src="/img/3.png" alt="" className="inline-block h-20 w-auto mr-2" /> 3er GRADO
                         </h3>
                     </div>
 
                     <div className="bg-gradient-to-r from-green-400 to-blue-500 hover:from-purple-500 hover:to-green-400 p-6 rounded-lg shadow-md text-center hover:shadow-2xl transition-shadow duration-300 cursor-pointer"
                         onClick={() => handleCategorySearch('Cuarto-grado')}>
-                        <h3 className="text-2xl font-semibold mb-4 text-white transition-transform duration-300 hover:scale-110">
+                        <h3 className="text-xl font-semibold mb-4 text-white transition-transform duration-300 hover:scale-110">
                             <img src="/img/4.png" alt="" className="inline-block h-20 w-auto mr-2" /> 4to GRADO
                         </h3>
                     </div>
 
                     <div className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-green-400 hover:to-yellow-400 p-6 rounded-lg shadow-md text-center hover:shadow-2xl transition-shadow duration-300 cursor-pointer"
                         onClick={() => handleCategorySearch('Quinto-grado')}>
-                        <h3 className="text-2xl font-semibold mb-4 text-white transition-transform duration-300 hover:scale-110">
+                        <h3 className="text-xl font-semibold mb-4 text-white transition-transform duration-300 hover:scale-110">
                             <img src="/img/5.png" alt="" className="inline-block h-20 w-auto mr-2" /> 5to GRADO
                         </h3>
                     </div>
 
                     <div className="bg-gradient-to-r from-blue-500 to-green-500 hover:from-orange-500 hover:to-yellow-300 p-6 rounded-lg shadow-md text-center hover:shadow-2xl transition-shadow duration-300 cursor-pointer"
                         onClick={() => handleCategorySearch('Sexto-grado')}>
-                        <h3 className="text-2xl font-semibold mb-4 text-white transition-transform duration-300 hover:scale-110">
+                        <h3 className="text-xl font-semibold mb-4 text-white transition-transform duration-300 hover:scale-110">
                             <img src="/img/6.png" alt="" className="inline-block h-20 w-auto mr-2" /> 6to GRADO
                         </h3>
                     </div>

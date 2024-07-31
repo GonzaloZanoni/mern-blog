@@ -8,7 +8,7 @@ export default function ConectarteArte() {
 
     useEffect(() => {
         const fetchPosts = async () => {
-            const res = await fetch('/api/post/getposts?category=reactjs&limit=6');
+            const res = await fetch('/api/post/getposts?category=Ciencias&limit=6');
             const data = await res.json();
             setPosts(data.posts);
         };
@@ -38,9 +38,9 @@ export default function ConectarteArte() {
                         </div>
                         <div className="flex flex-col justify-center p-4">
                             <h2 className="text-2xl font-bold mb-4 text-center md:text-left">Explora nuestras experiencias cientificas</h2>
-                            <p className="text-lg text-white text-center md:text-left">
+                            {/* <p className="text-lg text-white text-center md:text-left">
                                 A través de las ciencias, se realizaran entrevistas a ex-docentes de la institución, se investigarán acontecimientos importantes durantes los 25 años. Con todos los datos recopilados se creará una linea del tiempo.
-                            </p>
+                            </p> */}
                         </div>
                     </div>
                 </div>
@@ -62,7 +62,7 @@ export default function ConectarteArte() {
                                 <PostCard key={post._id} post={post} />
                             ))}
                         </div>
-                        <Link to={'/search?category=uncategorized'} className='text-lg font-semibold text-green-500 hover:underline text-center'>
+                        <Link to={`/search?category=${encodeURIComponent('Ciencias')}`} className='text-lg font-semibold text-green-500 hover:underline text-center'>
                             Ver más Posts
                         </Link>
                     </div>

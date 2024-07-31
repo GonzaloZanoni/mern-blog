@@ -44,9 +44,9 @@ export default function ConectarteArte() {
                         </div>
                         <div className="flex flex-col justify-center p-4">
                             <h2 className="text-2xl text-violet-900 font-bold mb-4 text-center md:text-left">Explora nuestras experiencias artísticas</h2>
-                            <p className="text-lg text-violet-100 text-center md:text-left">
+                            {/* <p className="text-lg text-violet-100 text-center md:text-left">
                                 A través de la tecnología y las artes visuales, se realizara un cortometraje y edición de video con la historia de nuestro establecimiento.
-                            </p>
+                            </p> */}
                         </div>
                     </div>
                 </div>

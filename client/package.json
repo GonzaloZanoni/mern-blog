@@ -29,6 +29,7 @@
     "redux-persist": "^6.0.0",
     "slate": "^0.103.0",
     "slate-react": "^0.105.0",
+    "swiper": "^11.1.8",
     "yup": "^1.4.0"
   },
   "devDependencies": {

@@ -9,6 +9,7 @@ import 'react-circular-progressbar/dist/styles.css';
 import { useNavigate } from 'react-router-dom';
 
 
+
 export default function CreatePost() {
     // const [editorHtml, setEditorHtml] = useState('');
     const [file, setFile] = useState(null);
@@ -143,19 +144,6 @@ export default function CreatePost() {
         }
     };
 
-
-    // toolbar text editor
-    const modules = {
-        toolbar: [
-            [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
-            [{ 'size': [] }],
-            ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-            [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
-            ['link'],
-            ['clean']
-        ],
-    };
-
     return (
 
         <div className="p-3 max-w-3xl mx-auto min-h-screen mb-28">
@@ -232,17 +220,25 @@ export default function CreatePost() {
                 )}
                 <ReactQuill
                     theme='snow'
-                    placeholder="Escribe algo..."
-                    className="h-72 mb-12"
+                    placeholder='Escribe algo...'
+                    className='h-72 mb-12'
                     required
-                    // value={editorHtml} 
-                    modules={modules}
-                    // onChange={setEditorHtml}
-                    onChange={
-                        (value) => {
-                            setFormData({ ...formData, content: value })
+                    modules={{
+                        toolbar: {
+                            container: [
+                                [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
+                                [{ 'size': [] }],
+                                ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                                [{ 'list': 'ordered' }, { 'list': 'bullet' },
+                                { 'indent': '-1' }, { 'indent': '+1' }],
+                                ['link', 'image'],
+                                ['clean']
+                            ],
                         }
-                    }
+                    }}
+                    onChange={(value) => {
+                        setFormData({ ...formData, content: value });
+                    }}
                 />
                 {/* <ReactQuill
                     theme="snow"

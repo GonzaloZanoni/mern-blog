@@ -1,5 +1,5 @@
 /* styles.css */
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
     .gallery-img-container {
         position: relative;
         overflow: hidden;
@@ -24,7 +24,104 @@
     width: 100%;
     height: auto;
     object-fit: cover;
+  } */
+  
+  /* ------------ GALERIA VERSION SLIDER --------*/ 
+
+/* Slider Styles */
+.slider-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.slider {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+.slide img {
+  width: 100%;
+  display: block;
+}
+
+.nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 24px;
+}
+
+.nav-button.prev {
+  left: 10px;
+}
+
+.nav-button.next {
+  right: 10px;
+}
+
+.indicators {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+}
+
+.indicator {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.indicator.active {
+  background: #fff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-button {
+    font-size: 20px;
+    padding: 8px;
   }
+}
+
+@media (max-width: 480px) {
+  .nav-button {
+    font-size: 16px;
+    padding: 6px;
+  }
+
+  .indicator {
+    width: 8px;
+    height: 8px;
+  }
+}
+
   
 
+  
+  
+
+  
   

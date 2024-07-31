@@ -161,6 +161,7 @@ export default function DashProfile() {
             console.log(error.message)
         }
     }
+    console.log('current user:', currentUser)
     return (
         <div className='max-w-lg mx-auto p-3 w-full'>
             <h1 className='my-7 text-center font-semibold text-3xl'>Profile</h1>
@@ -229,7 +230,7 @@ export default function DashProfile() {
                     {loading ? 'Loading...' : 'Update'}
                 </Button>
                 {
-                    currentUser.isAdmin && (
+                    (currentUser.isAdmin || currentUser.isEmployed) && (
                         <Link to={'/create-post'}>
                             <Button
                                 type='button'
