@@ -82,7 +82,7 @@ export default function Header1() {
                 </Button> */}
 
                 <div
-                    className={`nav-links duration-500 md:static absolute bg-white md:min-h-fit min-h-[100vh] left-0 ${isMenuOpen ? 'top-0' : 'top-[-100%]'
+                    className={`nav-links duration-500 md:static absolute bg-white md:min-h-fit min-h-[70vh] left-0 ${isMenuOpen ? 'top-0' : 'top-[-100%]'
                         } md:w-auto w-full flex flex-col items-center px-5 z-50`}
                 >
                     <div className="w-full flex justify-end md:hidden">
