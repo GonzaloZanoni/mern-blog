@@ -13,8 +13,16 @@ export default function UpdatePost() {
     const [file, setFile] = useState(null);
     const [imageUploadProgress, setImageUploadProgress] = useState(null);
     const [imageUploadError, setImageUploadError] = useState(null);
-    const [formData, setFormData] = useState({});
+    const [formData, setFormData] = useState({
+        title: '',
+        category: '',
+        image: '',
+        content: '',
+    });
     const [publishError, setPublishError] = useState(null);
+    const [gallery, setGallery] = useState([]);
+    const [galleryFiles, setGalleryFiles] = useState([]);
+    const [galleryUploadProgress, setGalleryUploadProgress] = useState([]);
     const { postId } = useParams();
     const { currentUser } = useSelector((state) => state.user);
 
@@ -33,6 +41,7 @@ export default function UpdatePost() {
                 if (res.ok) {
                     setPublishError(null);
                     setFormData(data.posts[0]);
+                    setGalleryFiles(data.posts[0].gallery || []);
                 }
             }
             fetchPost();
@@ -81,6 +90,56 @@ export default function UpdatePost() {
         }
     };
 
+    const handleUploadGallery = async () => {
+        try {
+            if (galleryFiles.length === 0) {
+                setImageUploadError('Please select at least one image for the gallery');
+                return;
+            }
+            if (galleryFiles.length > 10) {
+                setImageUploadError('You can upload up to 10 images only.');
+                return;
+            }
+            setImageUploadError(null);
+            const storage = getStorage(app);
+            const newGallery = [];
+            const progressArray = [];
+
+            for (let i = 0; i < galleryFiles.length; i++) {
+                const fileName = new Date().getTime() + '-' + galleryFiles[i].name;
+                const storageRef = ref(storage, fileName);
+                const uploadTask = uploadBytesResumable(storageRef, galleryFiles[i]);
+
+                uploadTask.on(
+                    'state_changed',
+                    (snapshot) => {
+                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                        progressArray[i] = progress.toFixed(0);
+                        setGalleryUploadProgress([...progressArray]);
+                    },
+                    // eslint-disable-next-line no-unused-vars
+                    (error) => {
+                        setImageUploadError('Gallery image upload failed');
+                        setGalleryUploadProgress([]);
+                    },
+                    async () => {
+                        const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+                        newGallery.push(downloadURL);
+                        if (newGallery.length === galleryFiles.length) {
+                            setGallery(newGallery);
+                            setGalleryUploadProgress([]);
+                            setImageUploadError(null);
+                        }
+                    }
+                );
+            }
+        } catch (error) {
+            setImageUploadError('Gallery image upload failed');
+            setGalleryUploadProgress([]);
+            console.log(error);
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -89,7 +148,7 @@ export default function UpdatePost() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify({ ...formData, gallery }),
             });
             const data = await res.json();
             if (!res.ok) {
@@ -106,11 +165,39 @@ export default function UpdatePost() {
         }
     }
 
+    const handleRefresh = async () => {
+        try {
+            // Limpia los errores y las imágenes cargadas
+            setImageUploadProgress(null);
+            setImageUploadError(null);
+            setGallery([]);
+            setGalleryFiles([]);
+
+            // Solicita los datos actualizados del post
+            const res = await fetch(`/api/post/getposts?postId=${postId}`);
+            const data = await res.json();
+            if (!res.ok) {
+                setPublishError(data.message);
+                return;
+            }
+            setPublishError(null);
+            setFormData({
+                title: data.posts[0].title,
+                category: data.posts[0].category,
+                image: data.posts[0].image,
+                content: data.posts[0].content,
+            });
+            setGallery(data.posts[0].gallery || []);
+        } catch (error) {
+            setPublishError('Failed to refresh post data');
+        }
+    };
+
     return (
 
         <div className="p-3 max-w-3xl mx-auto min-h-screen">
-            <h1 className="text-center text-3xl my-7 font-semibold">Update a post</h1>
-            <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+            <h1 className="text-center text-3xl my-7 font-semibold">Modificar el Post</h1>
+            <form className="flex flex-col gap-4 mb-28 " onSubmit={handleSubmit}>
                 <div className="flex flex-col gap-4 sm:flex-row justify-between">
                     <TextInput
                         type="text"
@@ -128,18 +215,30 @@ export default function UpdatePost() {
                         }
                         value={formData.category}
                     >
-                        <option value='uncategorized'>Select a category</option>
-                        <option value='javascript'>Javascript</option>
-                        <option value='reactjs'>React.js</option>
-                        <option value='nextjs'>Next.js</option>
+                        <option value='uncategorized'>Seleccionar categoría</option>
+                        <option value='Novedades'>Novedades</option>
+                        <option value='Primer-grado'>1er Grado</option>
+                        <option value='Segundo-grado'>2do Grado</option>
+                        <option value='Tercer-grado'>3er Grado</option>
+                        <option value='Cuarto-grado'>4to Grado</option>
+                        <option value='Quinto-grado'>5to Grado</option>
+                        <option value='Sexto-grado'>6to Grado</option>
+                        <option value='Artistica' className="font-bold text-orange-500">Artística</option>
+                        <option value='Ciencias' className="font-bold text-orange-500">Ciencias</option>
+                        <option value='Programacion' className="font-bold text-orange-500">Programación</option>
+                        <option value='Ingles'>Inglés</option>
+                        <option value='Educacion-fisica'>Educación Física</option>
+                        <option value='Artes-visuales'>Artes Visuales</option>
+                        <option value='Musica'>Música</option>
+                        <option value='uncategorized'>Sin-categoria</option>
                     </Select>
                 </div>
-                <div className="flex gap-4 items-center justify-between border-4 border-green-500 border-dotted p-3">
+                <h2 className="font-bold text-xl mt-5 sm:mt-5">Imagen de portada</h2>
+                <div className="flex gap-4 items-center justify-between border-2 border-grey-500 p-3">
                     <FileInput
                         typeof="file"
                         accept='image/*'
                         onChange={(e) => setFile(e.target.files[0])}
-
                     />
                     <Button
                         type='button'
@@ -147,7 +246,8 @@ export default function UpdatePost() {
                         size='sm'
                         outline
                         onClick={handleUploadImage}
-                        disabled={imageUploadProgress}
+                        // disabled={imageUploadProgress}
+                        disabled={!file || imageUploadProgress !== null}
                     >
                         {
                             imageUploadProgress ? (
@@ -158,7 +258,7 @@ export default function UpdatePost() {
                                     />
                                 </div>
                             ) : (
-                                'Upload Image'
+                                'Cargar Imagen'
                             )
                         }
                     </Button>
@@ -174,19 +274,87 @@ export default function UpdatePost() {
                 <ReactQuill
                     theme='snow'
                     value={formData.content}
-                    placeholder="Write something..."
-                    className="h-72 mb-12"
+                    placeholder="Escribe algo..."
+                    className="h-52 mb-12"
                     required
+                    modules={{
+                        toolbar: {
+                            container: [
+                                [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
+                                [{ 'size': [] }],
+                                ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                                [{ 'list': 'ordered' }, { 'list': 'bullet' },
+                                { 'indent': '-1' }, { 'indent': '+1' }],
+                                ['link'],
+                                ['clean']
+                            ],
+                        }
+                    }}
                     onChange={
                         (value) => {
                             setFormData({ ...formData, content: value })
                         }
                     }
                 />
-                <Button type="submit" gradientDuoTone='greenToBlue'>Update post</Button>
-                {
-                    publishError && <Alert className="m-5" color='failure'>{publishError}</Alert>
-                }
+                <div className="flex flex-col gap-4">
+                    <h2 className="font-bold text-xl mt-14 sm:mt-5">Galería de imágenes</h2>
+                    <FileInput
+                        typeof="file"
+                        accept='image/*'
+                        multiple
+                        onChange={(e) => setGalleryFiles([...e.target.files])}
+                    />
+                    <Button
+                        type='button'
+                        gradientDuoTone='greenToBlue'
+                        size='sm'
+                        outline
+                        onClick={handleUploadGallery}
+                        disabled={galleryFiles.length === 0 || galleryUploadProgress.length > 0}
+                    >
+                        {
+                            galleryUploadProgress.length > 0 ? (
+                                galleryUploadProgress.map((progress, index) => (
+                                    <div key={index} className="w-16 h-16">
+                                        <CircularProgressbar
+                                            value={progress}
+                                            text={`${progress || 0}%`}
+                                        />
+                                    </div>
+                                ))
+                            ) : (
+                                'Cargar Galería'
+                            )
+                        }
+                    </Button>
+                </div>
+                <div className="flex flex-wrap gap-4 mt-4">
+                    {gallery.map((image, index) => (
+                        <img
+                            key={index}
+                            src={image}
+                            alt={`gallery-${index}`}
+                            className="w-32 h-32 object-cover"
+                        />
+                    ))}
+                </div>
+                {publishError && <Alert color='failure'>{publishError}</Alert>}
+                {imageUploadError && <Alert color='failure'>{imageUploadError}</Alert>}
+                <Button
+                    type="submit"
+                    gradientDuoTone="greenToBlue"
+                    size="lg"
+                >
+                    Actualizar Post
+                </Button>
+                <Button
+                    type="button"
+                    gradientMonochrome="failure"
+                    size="lg"
+                    onClick={handleRefresh}
+                >
+                    Refrescar
+                </Button>
             </form>
         </div>
 

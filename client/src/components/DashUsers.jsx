@@ -75,12 +75,13 @@ export default function DashUsers() {
                 <>
                     <Table hoverable className="shadow-md">
                         <Table.Head>
-                            <Table.HeadCell>Date created</Table.HeadCell>
-                            <Table.HeadCell>User image</Table.HeadCell>
-                            <Table.HeadCell>User name</Table.HeadCell>
+                            <Table.HeadCell>Fecha Creación</Table.HeadCell>
+                            <Table.HeadCell>Perfil</Table.HeadCell>
+                            <Table.HeadCell>Nombre de usuario</Table.HeadCell>
                             <Table.HeadCell>E-mail</Table.HeadCell>
                             <Table.HeadCell>Admin</Table.HeadCell>
-                            <Table.HeadCell>Delete</Table.HeadCell>
+                            <Table.HeadCell>Docente</Table.HeadCell>
+                            <Table.HeadCell>Eliminar</Table.HeadCell>
 
                         </Table.Head>
                         {users.map((user) => (
@@ -103,6 +104,7 @@ export default function DashUsers() {
                                     </Table.Cell>
                                     <Table.Cell>{user.email}</Table.Cell>
                                     <Table.Cell>{user.isAdmin ? (<FaCheck className='text-green-500' />) : (<FaTimes className='text-red-500' />)}</Table.Cell>
+                                    <Table.Cell>{user.isEmployed ? (<FaCheck className='text-green-500' />) : (<FaTimes className='text-red-500' />)}</Table.Cell>
                                     <Table.Cell>
                                         <span
                                             onClick={() => {
@@ -111,7 +113,7 @@ export default function DashUsers() {
                                             }}
                                             className='font-medium text-red-400 hover:underline cursor-pointer'
                                         >
-                                            Delete
+                                            Eliminar
                                         </span>
                                     </Table.Cell>
 
@@ -125,12 +127,12 @@ export default function DashUsers() {
                             onClick={handleShowMore}
                             className='w-full text-teal-500 self-center text-sm py-7'
                         >
-                            Show more
+                            Ver más
                         </button>
                     )}
                 </>
             ) : (
-                <p>You have no user yet!</p>
+                <p>No existen usuarios!</p>
             )}
             <Modal show={showModal} onClose={() => setShowModal(false)} popup size='md'>
                 <Modal.Header />
@@ -138,10 +140,10 @@ export default function DashUsers() {
                     <div className='text-center'>
                         <HiOutlineExclamationCircle
                             className='h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto' />
-                        <h3 className='mb-5 text-lg text-gray-500 dark:text-gray-400'>Are you sure you want to delete this user?</h3>
+                        <h3 className='mb-5 text-lg text-gray-500 dark:text-gray-400'>¿Estás seguro de eliminar el usuario?</h3>
                         <div className='flex justify-center gap-4'>
-                            <Button color='failure' onClick={handleDeleteUser}>Yes, I´m sure</Button>
-                            <Button color='gray' onClick={() => setShowModal(false)}>No, Cancel</Button>
+                            <Button color='failure' onClick={handleDeleteUser}>Si, Estoy seguro.</Button>
+                            <Button color='gray' onClick={() => setShowModal(false)}>No, Cancelar.</Button>
                         </div>
                     </div>
                 </Modal.Body>

@@ -161,10 +161,10 @@ export default function DashProfile() {
             console.log(error.message)
         }
     }
-    console.log('current user:', currentUser)
+
     return (
         <div className='max-w-lg mx-auto p-3 w-full'>
-            <h1 className='my-7 text-center font-semibold text-3xl'>Profile</h1>
+            <h1 className='my-7 text-center font-semibold text-3xl'>Perfil</h1>
             <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
                 <input
                     type="file"
@@ -227,7 +227,7 @@ export default function DashProfile() {
                     outline
                     disabled={loading || imageFileUploading}
                 >
-                    {loading ? 'Loading...' : 'Update'}
+                    {loading ? 'Loading...' : 'Modificar'}
                 </Button>
                 {
                     (currentUser.isAdmin || currentUser.isEmployed) && (
@@ -237,15 +237,15 @@ export default function DashProfile() {
                                 gradientDuoTone='greenToBlue'
                                 className='w-full'
                             >
-                                Create a Post
+                                Crea un Post
                             </Button>
                         </Link>
                     )
                 }
             </form>
             <div className='text-red-500 flex justify-between mt-5'>
-                <span onClick={() => setShowModal(true)} className='cursor-pointer'>Delete Acount</span>
-                <span onClick={handleSignout} className='cursor-pointer'>Sign Out</span>
+                <span onClick={() => setShowModal(true)} className='cursor-pointer'>Eliminar Cuenta</span>
+                <span onClick={handleSignout} className='cursor-pointer'>Cerrar Sesión</span>
             </div>
             {updateUserSuccess && (
                 <Alert color='success' className='mt-5'>
@@ -268,10 +268,10 @@ export default function DashProfile() {
                     <div className='text-center'>
                         <HiOutlineExclamationCircle
                             className='h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto' />
-                        <h3 className='mb-5 text-lg text-gray-500 dark:text-gray-400'>Are you sure you want to delete your account?</h3>
+                        <h3 className='mb-5 text-lg text-gray-500 dark:text-gray-400'>¿Estas seguro de eliminar tu cuenta?</h3>
                         <div className='flex justify-center gap-4'>
-                            <Button color='failure' onClick={handleDeleteUser}>Yes, I´m sure</Button>
-                            <Button color='gray' onClick={() => setShowModal(false)}>No, Cancel</Button>
+                            <Button color='failure' onClick={handleDeleteUser}>Si, estoy seguro.</Button>
+                            <Button color='gray' onClick={() => setShowModal(false)}>No, Cancelar</Button>
                         </div>
                     </div>
                 </Modal.Body>

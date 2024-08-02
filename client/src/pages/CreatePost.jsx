@@ -7,23 +7,19 @@ import { app } from '../firebase';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { useNavigate } from 'react-router-dom';
-
-
+// import { useSelector } from "react-redux";
 
 export default function CreatePost() {
-    // const [editorHtml, setEditorHtml] = useState('');
     const [file, setFile] = useState(null);
     const [imageUploadProgress, setImageUploadProgress] = useState(null);
     const [imageUploadError, setImageUploadError] = useState(null);
-    // Se le agrega la galería
+    const [formData, setFormData] = useState({});
+    const [publishError, setPublishError] = useState(null);
     const [gallery, setGallery] = useState([]);
     const [galleryFiles, setGalleryFiles] = useState([]);
     const [galleryUploadProgress, setGalleryUploadProgress] = useState([]);
-
-    const [formData, setFormData] = useState({});
-    const [publishError, setPublishError] = useState(null);
+    // const { currentUser } = useSelector((state) => state.user);
     const navigate = useNavigate();
-
 
     const handleUploadImage = async () => {
         try {
@@ -53,26 +49,22 @@ export default function CreatePost() {
                         setImageUploadProgress(null);
                         setImageUploadError(null);
                         setFormData({ ...formData, image: downloadURL });
-                        // setFormData({ ...formData, image: downloadURL }); 
                     });
                 }
             );
-
-
         } catch (error) {
             setImageUploadError('Image upload failed');
             setImageUploadProgress(null);
-            console.log(error)
+            console.log(error);
         }
     };
 
-    // funcion de la subida de imagenes de la galeria
     const handleUploadGallery = async () => {
         try {
-            if (galleryFiles.length === 0) {
-                setImageUploadError('Please select at least one image for the gallery');
-                return;
-            }
+            // if (galleryFiles.length === 0) {
+            //     setImageUploadError('Please select at least one image for the gallery');
+            //     return;
+            // }
             if (galleryFiles.length > 10) {
                 setImageUploadError('You can upload up to 10 images only.');
                 return;
@@ -103,7 +95,7 @@ export default function CreatePost() {
                         const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
                         newGallery.push(downloadURL);
                         if (newGallery.length === galleryFiles.length) {
-                            setGallery(newGallery); // Asegúrate de que el estado gallery se actualiza correctamente
+                            setGallery(newGallery);
                             setGalleryUploadProgress([]);
                             setImageUploadError(null);
                         }
@@ -117,16 +109,15 @@ export default function CreatePost() {
         }
     };
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await fetch('/api/post/create', {
+            const res = await fetch(`/api/post/create`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ ...formData, gallery }), // Include gallery in the request body
+                body: JSON.stringify({ ...formData, gallery }),
             });
             const data = await res.json();
             if (!res.ok) {
@@ -140,31 +131,37 @@ export default function CreatePost() {
             }
         } catch (error) {
             setPublishError('Something went wrong');
-            console.log(error);
         }
     };
 
-    return (
+    const handleCancel = () => {
+        window.location.reload()
+        window.scrollTo(0, 0);
+    };
 
-        <div className="p-3 max-w-3xl mx-auto min-h-screen mb-28">
+    return (
+        <div className="p-3 max-w-3xl mx-auto min-h-screen">
             <h1 className="text-center text-3xl my-7 font-semibold">Crear un Post</h1>
             <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
                 <div className="flex flex-col gap-4 sm:flex-row justify-between">
                     <TextInput
                         type="text"
-                        placeholder="Escribe un Título"
+                        placeholder="Titulo"
                         required id="title"
                         className="flex-1"
                         onChange={(e) =>
                             setFormData({ ...formData, title: e.target.value })
                         }
+                        value={formData.title}
                     />
                     <Select
                         onChange={(e) =>
                             setFormData({ ...formData, category: e.target.value })
                         }
+                        value={formData.category}
                     >
                         <option value='uncategorized'>Seleccionar categoría</option>
+                        <option value='Novedades'>Novedades</option>
                         <option value='Primer-grado'>1er Grado</option>
                         <option value='Segundo-grado'>2do Grado</option>
                         <option value='Tercer-grado'>3er Grado</option>
@@ -194,7 +191,8 @@ export default function CreatePost() {
                         size='sm'
                         outline
                         onClick={handleUploadImage}
-                        disabled={imageUploadProgress}
+                        // disabled={imageUploadProgress}
+                        disabled={!file || imageUploadProgress !== null}
                     >
                         {
                             imageUploadProgress ? (
@@ -220,8 +218,9 @@ export default function CreatePost() {
                 )}
                 <ReactQuill
                     theme='snow'
-                    placeholder='Escribe algo...'
-                    className='h-72 mb-12'
+                    value={formData.content}
+                    placeholder="Escribe algo..."
+                    className="h-52 mb-12"
                     required
                     modules={{
                         toolbar: {
@@ -231,103 +230,80 @@ export default function CreatePost() {
                                 ['bold', 'italic', 'underline', 'strike', 'blockquote'],
                                 [{ 'list': 'ordered' }, { 'list': 'bullet' },
                                 { 'indent': '-1' }, { 'indent': '+1' }],
-                                ['link', 'image'],
+                                ['link'],
                                 ['clean']
                             ],
                         }
                     }}
-                    onChange={(value) => {
-                        setFormData({ ...formData, content: value });
-                    }}
+                    onChange={
+                        (value) => {
+                            setFormData({ ...formData, content: value })
+                        }
+                    }
                 />
-                {/* <ReactQuill
-                    theme="snow"
-                    value={editorHtml}
-                    onChange={setEditorHtml}
-                    modules={{
-                        toolbar: {
-                            container: [
-                                [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
-                                [{ 'size': [] }],
-                                ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-                                [{ 'list': 'ordered' }, { 'list': 'bullet' },
-                                { 'indent': '-1' }, { 'indent': '+1' }],
-                                ['link', 'image'],
-                                ['clean']
-                            ],
-                            handlers: {
-                                'image': handleUploadImage
-                            }
-                        }
-                    }}
-                /> */}
-
-                {/* PARTE GALERIA */}
-                <h2 className="font-bold text-xl mt-14 sm:mt-5">Galeria de imagenes</h2>
-                <h4 className="font-semibold text-sm">Solamente puedes subir hasta 10 imágenes.</h4>
-                <div className="flex flex-col gap-4   items-center justify-between border-2 border-grey-500 p-3">
-                    <div className="flex justify-between lg:gap-20 gap-5 w-full">
-                        <FileInput
-                            type="file"
-                            accept="image/*"
-                            multiple
-                            onChange={(e) => setGalleryFiles(Array.from(e.target.files))}
-                            className="rounded-lg sm:w-1/2"
-                        // onChange={(e) => {
-                        //     const files = Array.from(e.target.files);
-                        //     if (files.length > 10) {
-                        //         setImageUploadError('You can upload up to 10 images only.');
-                        //         return;
-                        //     }
-                        //     setGalleryFiles(files);
-                        // }}
-                        />
-                        <Button
-                            type='button'
-                            gradientDuoTone='greenToBlue'
-                            size='sm'
-                            outline
-                            onClick={handleUploadGallery}
-                            disabled={galleryUploadProgress.length > 0}
-                            className="w-1/3"
-                        >
-                            {galleryUploadProgress.length > 0 ? (
-                                <div className="w-16 h-16">
-                                    <CircularProgressbar
-                                        value={galleryUploadProgress.reduce((a, b) => a + b, 0) / galleryUploadProgress.length}
-                                        text={`${Math.round(galleryUploadProgress.reduce((a, b) => a + b, 0) / galleryUploadProgress.length) || 0}%`}
-                                    />
-                                </div>
+                <div className="flex flex-col gap-4">
+                    <h2 className="font-bold text-xl mt-14 sm:mt-5">Galería de imágenes</h2>
+                    <h4 className="font-semibold text-sm">Solamente puedes subir hasta 10 imágenes.</h4>
+                    <FileInput
+                        typeof="file"
+                        accept='image/*'
+                        multiple
+                        onChange={(e) => setGalleryFiles([...e.target.files])}
+                    />
+                    <Button
+                        type='button'
+                        gradientDuoTone='greenToBlue'
+                        size='sm'
+                        outline
+                        onClick={handleUploadGallery}
+                        disabled={galleryFiles.length === 0 || galleryUploadProgress.length > 0}
+                    >
+                        {
+                            galleryUploadProgress.length > 0 ? (
+                                galleryUploadProgress.map((progress, index) => (
+                                    <div key={index} className="w-16 h-16">
+                                        <CircularProgressbar
+                                            value={progress}
+                                            text={`${progress || 0}%`}
+                                        />
+                                    </div>
+                                ))
                             ) : (
-                                'Cargar Imagenes'
-                            )}
-                        </Button>
-                    </div>
-                    {imageUploadError && <Alert color='failure'>{imageUploadError}</Alert>}
-                    {gallery.length > 0 && (
-                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-                            {gallery.map((url, index) => (
-                                <img
-                                    key={index}
-                                    src={url}
-                                    alt={`Gallery Image ${index + 1}`}
-                                    className="w-full h-40 object-cover"
-                                />
-                            ))}
-                        </div>
-                    )}
-
+                                'Cargar Galería'
+                            )
+                        }
+                    </Button>
                 </div>
-                <Button type="submit" gradientDuoTone='purpleToBlue' className="mt-10 mb-10">Publicar</Button>
-                {/* {
-                    imageUploadError && <Alert color='failure'>{imageUploadError}</Alert>
-                } */}
+                <div className="flex flex-wrap gap-4 mt-4">
+                    {gallery.map((image, index) => (
+                        <img
+                            key={index}
+                            src={image}
+                            alt={`gallery-${index}`}
+                            className="w-32 h-32 object-cover"
+                        />
+                    ))}
+                </div>
+                {publishError && <Alert color='failure'>{publishError}</Alert>}
+                {imageUploadError && <Alert color='failure'>{imageUploadError}</Alert>}
+                <Button
+                    type="submit"
+                    gradientDuoTone="greenToBlue"
+                    size="lg"
+                    disabled={!formData.title || !formData.category}
+                >
+                    Publicar Post
+                </Button>
+                <Button
+                    type="button"
+                    gradientMonochrome="failure"
+                    size="lg"
+                    onClick={handleCancel}
+                >
+                    Cancelar
+                </Button>
 
-                {
-                    publishError && <Alert className="m-5" color='failure'>{publishError}</Alert>
-                }
             </form>
         </div>
-
     )
 }

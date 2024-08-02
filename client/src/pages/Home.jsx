@@ -106,7 +106,7 @@ export default function Home() {
             <section className="client">
                 <div className="section__container client__container">
                     <h1 className="section__header mb-5 p-3"><Link to='/projects'>Conect<span className='bg-orange-400 rounded-full p-1 pl-2 text-white'>Arte</span></Link></h1>
-                    <p className='bg-orange-100 p-5 rounded-2xl text-orange-700 font-semibold'>El proyecto ´conectARTE 25 años´, busca implementar un aprendizaje activo y significativo que involucra a estudiantes en la exploración de su entorno natural, social y cultural, usando la historia institucional de 25 años como marco.
+                    <p className='bg-orange-100 p-5 rounded-2xl text-orange-700'>El proyecto ´conectARTE 25 años´, busca implementar un aprendizaje activo y significativo que involucra a estudiantes en la exploración de su entorno natural, social y cultural, usando la historia institucional de 25 años como marco.
                         <Link to='/projects'><Button className='mt-4' gradientDuoTone='pinkToOrange' outline>Ver Proyecto</Button></Link>
                     </p>
                     <div className="client__grid">
@@ -142,8 +142,8 @@ export default function Home() {
                                 </Button>
                             </Link>
                         </div>
-                        <div className="client__card flex flex-col items-center justify-center bg-white  shadow-xl transform transition-transform duration-300 hover:scale-110">
-                            <h1 className='text-3xl font-bold mb-4 text-orange-500 '>Programación y TIC´s</h1>
+                        <div className="client__card flex flex-col text-center items-center justify-center bg-white  shadow-xl transform transition-transform duration-300 hover:scale-110">
+                            <h1 className='text-3xl font-bold mb-4 text-orange-500 '>Programación <br />y <br />TIC´s</h1>
                             <img src="img/programacion.jpg" alt="client" />
                             <p>
                                 Mira nuestras actividades para la creación de juegos interactivos a través de la plataforma ´SCRATCH´,   y mucho más...

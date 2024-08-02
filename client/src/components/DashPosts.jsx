@@ -80,99 +80,118 @@ export default function DashPosts() {
     };
 
     return (
-        <div className='w-full table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
-            {/* {currentUser.isAdmin && userPosts.length > 0 ? ( */}
-            {userPosts.length > 0 ? (
-                <>
-                    <Table hoverable className="shadow-md">
-                        <Table.Head>
-                            <Table.HeadCell>Date update</Table.HeadCell>
-                            <Table.HeadCell>Post image</Table.HeadCell>
-                            <Table.HeadCell>Post title</Table.HeadCell>
-                            <Table.HeadCell>Category</Table.HeadCell>
-                            {(currentUser.isAdmin || currentUser.isEmployed) && <Table.HeadCell>Delete</Table.HeadCell>}
-                            {(currentUser.isAdmin || currentUser.isEmployed) && <Table.HeadCell><span>Edit</span></Table.HeadCell>}
-                            {/* <Table.HeadCell>Delete</Table.HeadCell> */}
-                            {/* <Table.HeadCell><span>Edit</span></Table.HeadCell> */}
+        <>
 
-                        </Table.Head>
-                        {userPosts.map((post) => (
-                            <Table.Body className='divide-y' key={post._id}>
-                                <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                                    <Table.Cell>
-                                        {new Date(post.updatedAt).toLocaleDateString()}
-                                    </Table.Cell>
-                                    <Table.Cell>
-                                        <Link to={`/post/${post.slug}`}>
-                                            <img
-                                                src={post.image}
-                                                alt={post.title}
-                                                className='w-20 h-10 object-cover bg-gray-500'
-                                            />
-                                        </Link>
-                                    </Table.Cell>
-                                    <Table.Cell>
-                                        <Link
-                                            className='font-medium text-gray-900 dark:text-white'
-                                            to={`/post/${post.slug}`}
-                                        >
-                                            {post.title}
-                                        </Link>
-                                    </Table.Cell>
-                                    <Table.Cell>{post.category}</Table.Cell>
-                                    {(currentUser.isAdmin || currentUser.isEmployed) && (
-                                        <>
-                                            <Table.Cell>
-                                                <span
-                                                    onClick={() => {
-                                                        setShowModal(true);
-                                                        setPostIdToDelete(post._id);
-                                                    }}
-                                                    className='font-medium text-red-500 hover:underline cursor-pointer'
-                                                >
-                                                    Delete
-                                                </span>
-                                            </Table.Cell>
-                                            <Table.Cell>
-                                                <Link
-                                                    className='text-blue-500 hover:underline'
-                                                    to={`/update-post/${post._id}`}
-                                                >
-                                                    <span>Edit</span>
-                                                </Link>
-                                            </Table.Cell>
-                                        </>
-                                    )}
-                                </Table.Row>
-                            </Table.Body>
-                        ))}
-                    </Table>
-                    {showMore && (
-                        <button
-                            onClick={handleShowMore}
-                            className='w-full text-teal-500 self-center text-sm py-7'
-                        >
-                            Show more
-                        </button>
-                    )}
-                </>
-            ) : (
-                <p>You have no posts yet!</p>
-            )}
-            <Modal show={showModal} onClose={() => setShowModal(false)} popup size='md'>
-                <Modal.Header />
-                <Modal.Body>
-                    <div className='text-center'>
-                        <HiOutlineExclamationCircle
-                            className='h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto' />
-                        <h3 className='mb-5 text-lg text-gray-500 dark:text-gray-400'>Are you sure you want to delete your account?</h3>
-                        <div className='flex justify-center gap-4'>
-                            <Button color='failure' onClick={handleDeletePost}>Yes, I´m sure</Button>
-                            <Button color='gray' onClick={() => setShowModal(false)}>No, Cancel</Button>
+            <div className='w-full table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
+                <div className="w-[150px] m-5">
+                    {
+                        (currentUser.isAdmin || currentUser.isEmployed) && (
+                            <Link to={'/create-post'}>
+                                <Button
+                                    type='button'
+                                    gradientDuoTone='greenToBlue'
+                                    className='w-full'
+                                >
+                                    Crea un Post
+                                </Button>
+                            </Link>
+                        )
+                    }
+                </div>
+
+                {/* {currentUser.isAdmin && userPosts.length > 0 ? ( */}
+                {userPosts.length > 0 ? (
+                    <>
+                        <Table hoverable className="shadow-md">
+                            <Table.Head>
+                                <Table.HeadCell>Date update</Table.HeadCell>
+                                <Table.HeadCell>Post image</Table.HeadCell>
+                                <Table.HeadCell>Post title</Table.HeadCell>
+                                <Table.HeadCell>Category</Table.HeadCell>
+                                {(currentUser.isAdmin || currentUser.isEmployed) && <Table.HeadCell>Delete</Table.HeadCell>}
+                                {(currentUser.isAdmin || currentUser.isEmployed) && <Table.HeadCell><span>Edit</span></Table.HeadCell>}
+                                {/* <Table.HeadCell>Delete</Table.HeadCell> */}
+                                {/* <Table.HeadCell><span>Edit</span></Table.HeadCell> */}
+
+                            </Table.Head>
+                            {userPosts.map((post) => (
+                                <Table.Body className='divide-y' key={post._id}>
+                                    <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                                        <Table.Cell>
+                                            {new Date(post.updatedAt).toLocaleDateString()}
+                                        </Table.Cell>
+                                        <Table.Cell>
+                                            <Link to={`/post/${post.slug}`}>
+                                                <img
+                                                    src={post.image}
+                                                    alt={post.title}
+                                                    className='w-20 h-10 object-cover bg-gray-500'
+                                                />
+                                            </Link>
+                                        </Table.Cell>
+                                        <Table.Cell>
+                                            <Link
+                                                className='font-medium text-gray-900 dark:text-white'
+                                                to={`/post/${post.slug}`}
+                                            >
+                                                {post.title}
+                                            </Link>
+                                        </Table.Cell>
+                                        <Table.Cell>{post.category}</Table.Cell>
+                                        {(currentUser.isAdmin || currentUser.isEmployed) && (
+                                            <>
+                                                <Table.Cell>
+                                                    <span
+                                                        onClick={() => {
+                                                            setShowModal(true);
+                                                            setPostIdToDelete(post._id);
+                                                        }}
+                                                        className='font-medium text-red-500 hover:underline cursor-pointer'
+                                                    >
+                                                        Eliminar
+                                                    </span>
+                                                </Table.Cell>
+                                                <Table.Cell>
+                                                    <Link
+                                                        className='text-blue-500 hover:underline'
+                                                        to={`/update-post/${post._id}`}
+                                                    >
+                                                        <span>Editar</span>
+                                                    </Link>
+                                                </Table.Cell>
+                                            </>
+                                        )}
+                                    </Table.Row>
+                                </Table.Body>
+                            ))}
+                        </Table>
+                        {showMore && (
+                            <button
+                                onClick={handleShowMore}
+                                className='w-full text-teal-500 self-center text-sm py-7'
+                            >
+                                Ver Más
+                            </button>
+                        )}
+                    </>
+                ) : (
+                    <p>No existen post!</p>
+                )}
+                <Modal show={showModal} onClose={() => setShowModal(false)} popup size='md'>
+                    <Modal.Header />
+                    <Modal.Body>
+                        <div className='text-center'>
+                            <HiOutlineExclamationCircle
+                                className='h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto' />
+                            <h3 className='mb-5 text-lg text-gray-500 dark:text-gray-400'>¿Estás seguro de eliminar el siguiente post?</h3>
+                            <div className='flex justify-center gap-4'>
+                                <Button color='failure' onClick={handleDeletePost}>Si, Estoy seguro.</Button>
+                                <Button color='gray' onClick={() => setShowModal(false)}>No, Cancelar.</Button>
+                            </div>
                         </div>
-                    </div>
-                </Modal.Body>
-            </Modal>
-        </div >
+                    </Modal.Body>
+                </Modal>
+            </div >
+        </>
     );
 }

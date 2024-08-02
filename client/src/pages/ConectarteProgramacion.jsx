@@ -21,7 +21,7 @@ export default function ConectarteProgramacion() {
                 <div className="max-w-6xl mx-auto">
                     <h1 className="mb-8 text-4xl sm:text-4xl font-semibold text-center text-white">Programación y TIC´s<span className="font-semibold text-6xl text-blue-700">.</span></h1>
                     <div className="flex justify-start items-center">
-                        <img src="img/arte.jpg" alt="Artística" className="max-w-10 h-auto rounded-full m-3 mr-0" />
+                        <img src="img/perfil-image.jpg" alt="Artística" className="max-w-10 h-auto rounded-full m-3 mr-0" />
                         <h2 className="m-3 text-lg text-white font-semibold">Gonzalo Zanoni</h2>
                     </div>
                     <p className="bg-blue-300 p-5 mb-10 sm:mb-8 rounded-2xl text-white-700 font-semibold text-center">
@@ -30,7 +30,7 @@ export default function ConectarteProgramacion() {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                         <div className="flex justify-center items-center mt-10">
-                            <img src="img/arte.jpg" alt="Artística" className="rounded-lg max-w-80 h-auto" />
+                            <img src="img/programacion1.jpg" alt="Artística" className="rounded-lg max-w-80 h-auto" />
                         </div>
                         <div className="flex flex-col justify-center p-4">
                             <h2 className="text-2xl text-blue-300 font-bold mb-4 text-center md:text-left">Explora nuestras experiencias tecnológicas.</h2>
@@ -64,6 +64,27 @@ export default function ConectarteProgramacion() {
                         </Link>
                     </div>
                 )}
+            </div>
+            <div className="bg-blue-600 w-full">
+                <div className="client__grid p-10">
+                    <Link to='/projects' className="">
+                        <div className="client__card cursor-pointer flex flex-col items-center justify-center bg-orange-500 shadow-2xl transform transition-transform duration-300 hover:scale-110">
+                            <h1 className='text-4xl font-semibold  text-white'>ConectArte</h1>
+                        </div>
+                    </Link>
+                    <Link to='/conectarte-arte' className="">
+                        <div className="client__card cursor-pointer flex flex-col items-center justify-center bg-violet-500 shadow-xl transform transition-transform duration-300 hover:scale-110">
+                            <h1 className='text-4xl font-semibold  text-white'>Artística</h1>
+                        </div>
+                    </Link>
+                    <Link to='/conectarte-ciencia' className="">
+                        <div className="client__card cursor-pointer flex flex-col items-center justify-center bg-green-500 shadow-xl transform transition-transform duration-300 hover:scale-110">
+                            <h1 className='text-4xl font-semibold  text-white'>Ciencias</h1>
+
+                        </div>
+                    </Link>
+
+                </div>
             </div>
 
         </>

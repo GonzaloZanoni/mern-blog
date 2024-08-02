@@ -5,7 +5,7 @@ export default function Projects() {
         <section className="client">
             <div className="section__container client__container">
                 <h1 className="section__header mb-5 p-3 pb-10">Conect<span className='bg-orange-400 rounded-full p-1 pl-2 text-white'>Arte</span></h1>
-                <p className='bg-orange-100 p-5 rounded-2xl text-orange-700 font-semibold'>El proyecto <u>´conectARTE 25 años´</u> busca implementar un aprendizaje activo y significativo que involucra a estudiantes en la exploración de su entorno natural, social y cultural, usando la historia institucional de 25 años como marco.
+                <p className='bg-orange-100 p-5 rounded-2xl text-orange-700'>El proyecto <u className=" font-semibold">´conectARTE 25 años´</u> busca implementar un aprendizaje activo y significativo que involucra a estudiantes en la exploración de su entorno natural, social y cultural, usando la historia institucional de 25 años como marco.
 
                 </p>
                 <section className="grid grid-cols-1 md:grid-cols-3 gap-10 mt-[40px] text-center justify-center">

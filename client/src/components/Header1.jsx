@@ -52,7 +52,7 @@ export default function Header1() {
     };
 
     return (
-        <Navbar className="w-full z-50 border-b-2 border-green-300 shadow-2xl h-20 flex">
+        <Navbar className="w-full z-50 border-b-2 border-green-400 shadow-2xl h-20 flex">
             <nav className="flex justify-between items-center w-[92%] mx-auto">
                 <Link to="/" className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white">
                     <span className="px-2 py-1 bg-gradient-to-r from-green-500 via-green-500 to-green-700 rounded-lg text-white">
@@ -82,7 +82,7 @@ export default function Header1() {
                 </Button> */}
 
                 <div
-                    className={`nav-links duration-500 md:static absolute bg-white md:min-h-fit min-h-[70vh] left-0 ${isMenuOpen ? 'top-0' : 'top-[-100%]'
+                    className={`nav-links duration-500 md:static absolute bg-white md:min-h-fit min-h-[100vh] left-0 ${isMenuOpen ? 'top-0' : 'top-[-100%]'
                         } md:w-auto w-full flex flex-col items-center px-5 z-50`}
                 >
                     <div className="w-full flex justify-end md:hidden">
@@ -137,10 +137,10 @@ export default function Header1() {
                             <span className="block text-sm font-medium truncate">{currentUser.email}</span>
                         </Dropdown.Header>
                         <Link to="/dashboard?tab=profile">
-                            <Dropdown.Item>Profile</Dropdown.Item>
+                            <Dropdown.Item>Panel de Control</Dropdown.Item>
                         </Link>
                         <Dropdown.Divider />
-                        <Dropdown.Item onClick={handleSignout}>Sign out</Dropdown.Item>
+                        <Dropdown.Item onClick={handleSignout}>Cerrar Sesión</Dropdown.Item>
                     </Dropdown>
                 ) : (
 
