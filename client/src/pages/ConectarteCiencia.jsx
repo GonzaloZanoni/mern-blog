@@ -26,7 +26,7 @@ export default function ConectarteArte() {
                     </div>
                     <div className="flex justify-start items-center">
                         <img src="img/perfil-image.jpg" alt="Artística" className="max-w-10 h-auto rounded-full m-3 mr-0" />
-                        <h2 className="m-3 text-lg text-white font-semibold">Fabiana Noriega</h2>
+                        <h2 className="m-3 text-lg text-white font-semibold">Mercedes Albornoz</h2>
                     </div>
                     <p className="bg-green-300 p-5 mb-10 sm:mb-8 rounded-2xl text-green-700 font-semibold text-center">
                         En este espacio se utilizaran metodologías activas de aprendizaje basadas en aprendizajes por indagación y en aprendizajes basados en proyectos/problemas, esto implica fomentar cualidades como la curiosidad y /o la experimentación.
