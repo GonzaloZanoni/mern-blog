@@ -2,6 +2,7 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import PostCard from '../components/PostCard';
+import GamesSection from "../components/GameSection";
 
 export default function ConectarteProgramacion() {
     const [posts, setPosts] = useState([]);
@@ -49,6 +50,7 @@ export default function ConectarteProgramacion() {
                     fill="#2722C3" d="M0,256L60,250.7C120,245,240,235,360,202.7C480,171,600,117,720,112C840,107,960,149,1080,170.7C1200,192,1320,192,1380,192L1440,192L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z">
                 </path>
             </svg>
+            <GamesSection />
             <div className='max-w-8xl mx-auto p-3 flex flex-col gap-8 py-7 bg-transparent'>
                 {posts && posts.length > 0 && (
                     <div className='flex flex-col gap-6'>
