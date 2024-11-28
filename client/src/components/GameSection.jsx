@@ -79,13 +79,10 @@ const games = [
 
 const GamesSection = () => {
 
-
-
-
     return (
         <div className="games-container">
             {/* <h1 className="title">Scratch 6to Grado</h1> */}
-            <img src="./public/img/scratch.jpg" className='logo_scratch' alt="logo_scratch" />
+            <img src="./public/img/scratch.png" className='logo_scratch' alt="logo_scratch" />
             <div className="games-grid">
                 {games.map((game) => (
                     <div key={game.id} className="game-item">
