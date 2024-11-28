@@ -1,3 +1,7 @@
+.logo_scratch{
+  width: 500px;
+  height: 400px;
+}
 .games-container {
     max-width: 1500px; /* Ancho máximo para laptops */
     margin: 0 auto; /* Centrar el contenedor */
